@@ -82,8 +82,8 @@ New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Security Admin" 
 New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Log Analytics Contributor" -ResourceGroupName $ResourceGroup
 New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Monitoring Contributor" -ResourceGroupName $ResourceGroup
 New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Azure Connected Machine Resource Administrator" -ResourceGroupName $ResourceGroup
+New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "User Access Administrator" -ResourceGroupName $ResourceGroup
 #New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Resource Policy Contributor" -ResourceGroupName $ResourceGroup
-#New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "User Access Administrator" -ResourceGroupName $ResourceGroup
 #New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Virtual Machine Contributor" -ResourceGroupName $ResourceGroup
 
 #assign RBAC roles to cohacker user on the subscription
