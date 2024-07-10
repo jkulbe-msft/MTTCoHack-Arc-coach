@@ -87,7 +87,6 @@ New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Azure Connected 
 #New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Virtual Machine Contributor" -ResourceGroupName $ResourceGroup
 
 #assign RBAC roles to cohacker user on the subscription
-New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Monitoring Contributor" -ResourceGroupName $ResourceGroup
 New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Resource Policy Contributor - Custom" -Scope /subscriptions/$subscriptionId
 
 $WorkspaceName = "log-analytics-" + (Get-Random -Maximum 99999) # workspace names need to be unique in resource group - Get-Random helps with this for the example code
@@ -95,3 +94,5 @@ $Location = $region
 
 # Create the workspace
 New-AzOperationalInsightsWorkspace -Location $Location -Name $WorkspaceName -Sku PerGB2018 -ResourceGroupName $ResourceGroup
+
+Write-Host "cohacker$team@$domain password: $password1"
