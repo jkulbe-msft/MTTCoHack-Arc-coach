@@ -1,30 +1,11 @@
 # MTTCoHack-Arc
 
-## Setup instructions local environment
+## Setup instructions HVHOST environment
 
-1. Download files from the Setup folder to a local machine with Hyper-V. 32 GB RAM recommended.
+Deploy Arc lab to Azure:
 
-2. Start **Windows PowerShell** as an **Administrator**.
+[![Deploy Arc lab to Azure](https://raw.githubusercontent.com/jkulbe-msft/MTTCoHack-Arc-coach/main/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjkulbe-msft%2FMTTCoHack-Arc-coach%2Fmain%2Fazuredeploy_arc.json)
 
-3. Run the script from the setup folder
-    ```powershell 
-    .\MTTCoHackArc_HyperVSetup.ps1
-    ```
-
-4. The script will set up a simulated data center with the following machines:
-   - **DC1** - Windows Server 2022, Domain Controller
-   - **SRV1** - Windows Server 2022, SQL Server 2022
-  Note the indicated user name and password.
-
-5. Open Hyper-V Manager and click on **"Quick Create..."** in the Actions bar.
-    >![](./images/quickcreate1.jpg)
-
-6. Select "Ubuntu 22.04 LTS" and click on **"Create Virtual Machine"**.
-   >![](./images/quickcreate2.jpg)
-     
-7. After deployment of the Linux machine, double click on it in the central pane to open the console and follow the instructions to set up a **user** and **password** on the Linux machine. You can use the same user name and password as for the Windows machines.
-   >![](./images/ubuntu1.jpg)
-   
 
 ## Setup instructions Azure environment
 
