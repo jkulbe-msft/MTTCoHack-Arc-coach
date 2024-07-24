@@ -29,10 +29,10 @@ Deploy Arc lab to Azure:
     .\MTTCoHackArc_AzureSetup.ps1 -region 'northeurope'
     ```
   
-   >**Note**: You have to authenticate with an owner account to Microsoft Graph by following the instructions displayed on the console.
+   >**Note**: You have to authenticate with an owner account to Microsoft Graph by following the instructions displayed on the console. Don't walk away from the console until the deployment is done.
    >![archi](./images/graph-auth.png)
 
-   >**Note**: If you got an error about Microsoft Graph, you may need to delete the application "Microsoft Graph PowerShell" in the menu "entreprise app"
+   >**Note**: If you got an error about Microsoft Graph, you may need to delete the application "Microsoft Graph PowerShell" in the menu "enterprise app"
    >![archi](./images/powershellapp.png)
 
 7. Once the deployment is done, store credentials information to share them with attendees:
