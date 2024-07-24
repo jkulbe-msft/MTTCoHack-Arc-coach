@@ -17,6 +17,7 @@ Write-Output "VirtualNetworkPrefix: $VirtualNetworkPrefix"
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 Install-Module Subnet -Force
 
+Set-VMHost -EnableEnhancedSessionMode $True
 New-VMSwitch -Name "NestedSwitch" -SwitchType Internal
 
 $NIC1IP = Get-NetIPAddress | Where-Object -Property AddressFamily -EQ IPv4 | Where-Object -Property IPAddress -EQ $NIC1IPAddress
