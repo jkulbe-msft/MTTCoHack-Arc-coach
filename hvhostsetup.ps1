@@ -107,7 +107,7 @@ Add-LabMachineDefinition -Name 'DC1' -Roles RootDC,Routing -NetworkAdapter $netA
 # file and SQL server
 Add-LabDiskDefinition -Name 'SRV1-Data' -DiskSizeInGb 10 -Label 'Data' -DriveLetter S
 Add-LabDiskDefinition -Name 'SRV1-Logs' -DiskSizeInGb 10 -Label 'Logs' -DriveLetter L
-Add-LabMachineDefinition -Name 'SRV1' -Roles FileServer,SQLServer2022 -IsDomainJoined -DiskName 'SRV1-Data','SRV1-Logs' -OperatingSystem $osNameWithDesktop -MinMemory 1GB -MaxMemory 8GB  -Network $labname -Gateway 192.168.50.3 
+Add-LabMachineDefinition -Name 'SRV1' -Roles FileServer,SQLServer2022 -IsDomainJoined -DiskName 'SRV1-Data','SRV1-Logs' -OperatingSystem $osNameWithDesktop -MinMemory 1GB -MaxMemory 8GB -Processors 4 -Network $labname -Gateway 192.168.50.3 
 
 # Linux
 Add-LabMachineDefinition -Name 'LIN1' -OperatingSystem $osLinux -IsDomainJoined -MinMemory 512MB -MaxMemory 4GB -Network $labname -Gateway 192.168.50.3 
