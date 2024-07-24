@@ -53,6 +53,7 @@ Enable-LabHostRemoting -Force
 Update-LabSysinternalsTools
 # download Windows Server 2022 Evaluation
 Start-BitsTransfer -Destination C:\LabSources\ISOs\WindowsServer2022Eval.iso -Source 'https://go.microsoft.com/fwlink/p/?LinkID=2195280&clcid=0x409&culture=en-us&country=US'
+Start-BitsTransfer -Destination C:\LabSources\OSUpdates\windows10.0-kb5031364-x64_03606fb9b116659d52e2b5f5a8914bbbaaab6810.msu -Source 'https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/10/windows10.0-kb5031364-x64_03606fb9b116659d52e2b5f5a8914bbbaaab6810.msu'
 
 # download SQL Server 2022
 Start-BitsTransfer -Destination C:\LabSources\sql2022-ssei-dev.exe -Source 'https://go.microsoft.com/fwlink/?linkid=2215202&clcid=0x409&culture=en-us&country=us'
@@ -113,14 +114,17 @@ Add-LabMachineDefinition -Name 'LIN1' -OperatingSystem $osLinux -IsDomainJoined 
 
 Install-Lab -DelayBetweenComputers 60 -ErrorAction Continue
 
+# patch SRV1
+Copy-LabFileItem -Path "C:\LabSources\OSUpdates\windows10.0-kb5031364-x64_03606fb9b116659d52e2b5f5a8914bbbaaab6810.msu" -ComputerName SRV1 -DestinationFolderPath C:\
+Invoke-LabCommand -ActivityName "update SRV1" -ComputerName SRV1 -scriptblock { 
+    expand -f:* C:\windows10.0-kb5031364-x64_03606fb9b116659d52e2b5f5a8914bbbaaab6810.msu C:\ ;
+    dism /online /add-package /packagepath:C:\Windows10.0-KB5031364-x64.cab /quiet /norestart }
+Restart-LabVM -ComputerName 'SRV1'
+    
 # Features
 $dcjob = Install-LabWindowsFeature -FeatureName RSAT -ComputerName 'DC1' -IncludeAllSubFeature -IncludeManagementTools
 
 Wait-LWLabJob -Job $dcjob -ProgressIndicator 10 -NoDisplay -PassThru
-
-Get-LabVM | ? Name -ne 'dc1' | Restart-LabVM -Wait
-
-# AD setup
 
 Show-LabDeploymentSummary -Detailed
 Stop-Transcript
