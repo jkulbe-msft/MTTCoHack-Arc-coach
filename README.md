@@ -4,7 +4,7 @@
 
 Deploy Arc lab to Azure:
 
-[![Deploy Arc lab to Azure](https://raw.githubusercontent.com/jkulbe-msft/MTTCoHack-Arc-coach/main/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjkulbe-msft%2FMTTCoHack-Arc-coach%2Fmain%2Fazuredeploy_arc.json)
+[![Deploy Arc lab to Azure](https://raw.githubusercontent.com/jkulbe-msft/MTTCoHack-Arc-coach/main/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjkulbe-msft%2FMTTCoHack-Arc-coach%2Fmain%2Fazuredeploy.json)
 
 
 ## Setup instructions Azure environment
