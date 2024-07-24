@@ -8,6 +8,11 @@ param (
 
 Start-Transcript -Path C:\transcripts\hvhostsetup.txt
 
+Write-Output "NIC1IPAddress: $NIC1IPAddress"
+Write-Output "NIC2IPAddress: $NIC2IPAddress"
+Write-Output "GhostedSubnetPrefix: $GhostedSubnetPrefix"
+Write-Output "VirtualNetworkPrefix: $VirtualNetworkPrefix"
+
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 Install-Module Subnet -Force
