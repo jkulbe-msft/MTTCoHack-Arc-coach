@@ -51,6 +51,7 @@ $env:AUTOMATEDLAB_TELEMETRY_OPTIN = 'true'
 New-LabSourcesFolder -DriveLetter C -Force
 Enable-LabHostRemoting -Force
 Update-LabSysinternalsTools
+Set-PSFConfig -Module AutomatedLab -Name DoNotWaitForLinux -Value $true
 # download Windows Server 2022 Evaluation
 Start-BitsTransfer -Destination C:\LabSources\ISOs\WindowsServer2022Eval.iso -Source 'https://go.microsoft.com/fwlink/p/?LinkID=2195280&clcid=0x409&culture=en-us&country=US'
 Start-BitsTransfer -Destination C:\LabSources\OSUpdates\windows10.0-kb5031364-x64_03606fb9b116659d52e2b5f5a8914bbbaaab6810.msu -Source 'https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/secu/2023/10/windows10.0-kb5031364-x64_03606fb9b116659d52e2b5f5a8914bbbaaab6810.msu'
@@ -110,7 +111,7 @@ Add-LabDiskDefinition -Name 'SRV1-Logs' -DiskSizeInGb 10 -Label 'Logs' -DriveLet
 Add-LabMachineDefinition -Name 'SRV1' -Roles FileServer,SQLServer2022 -IsDomainJoined -DiskName 'SRV1-Data','SRV1-Logs' -OperatingSystem $osNameWithDesktop -MinMemory 1GB -MaxMemory 8GB -Processors 4 -Network $labname -Gateway 192.168.50.3 
 
 # Linux
-Add-LabMachineDefinition -Name 'LIN1' -OperatingSystem $osLinux -MinMemory 512MB -MaxMemory 4GB -IsDomainJoined -Network $labname -Gateway 192.168.50.3
+Add-LabMachineDefinition -Name 'LIN1' -OperatingSystem $osLinux -MinMemory 512MB -MaxMemory 4GB -Network 'NestedSwitch'
 
 Install-Lab -DelayBetweenComputers 60 -ErrorAction Continue
 
