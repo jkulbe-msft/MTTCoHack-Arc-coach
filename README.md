@@ -8,8 +8,8 @@
    
    This will set up a Hyper-V host **HVHOST** with the following VMs:
    - **DC1**: Domain Controller running Windows Server 2022 without GUI
-    - **SRV1**: Windows Server 2022 with SQL Server 2022, joined to the domain corp.contoso.com
-    - **LIN1**: Ubuntu Linux 24.04, standalone 
+   - **SRV1**: Windows Server 2022 with SQL Server 2022, joined to the domain corp.contoso.com
+   - **LIN1**: Ubuntu Linux 24.04, standalone 
 
     DC1 and SRV1 are joined to the domain corp.contoso.com. The domain admin account is `corp\administrator` with the password `Somepass1`.
 
