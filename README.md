@@ -2,10 +2,20 @@
 
 ## Setup instructions HVHOST environment
 
-Deploy Arc lab to Azure:
+1. Deploy Arc lab to Azure: 
+    
+    [![Deploy Arc lab to Azure](https://raw.githubusercontent.com/jkulbe-msft/MTTCoHack-Arc-coach/main/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjkulbe-msft%2FMTTCoHack-Arc-coach%2Fmain%2Fazuredeploy.json)
+   
+   This will set up a Hyper-V host **HVHOST** with the following VMs:
+   - **DC1**: Domain Controller running Windows Server 2022 without GUI
+    - **SRV1**: Windows Server 2022 with SQL Server 2022, joined to the domain corp.contoso.com
+    - **LIN1**: Ubuntu Linux 24.04, standalone 
 
-[![Deploy Arc lab to Azure](https://raw.githubusercontent.com/jkulbe-msft/MTTCoHack-Arc-coach/main/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjkulbe-msft%2FMTTCoHack-Arc-coach%2Fmain%2Fazuredeploy.json)
+    DC1 and SRV1 are joined to the domain corp.contoso.com. The domain admin account is `corp\administrator` with the password `Somepass1`.
 
+2. Sign in to HVHOST using RDP, open the Hyper-V console, connect to LIN1 and finish the setup by accepting the default settings. Create a user account and password and note it down.
+
+3. Share the login details for HVHOST, DC1, SRV1 and LIN1 with the attendees.
 
 ## Setup instructions Azure environment
 
@@ -35,7 +45,7 @@ Deploy Arc lab to Azure:
    >**Note**: If you got an error about Microsoft Graph, you may need to delete the application "Microsoft Graph PowerShell" in the menu "enterprise app"
    >![archi](./images/powershellapp.png)
 
-7. Once the deployment is done, store credentials information to share them with attendees:
+7. Once the deployment is done, store credentials information to share them with attendees
     
 
 ## Clean up
@@ -47,9 +57,9 @@ Deploy Arc lab to Azure:
     .\MTTCoHackArc_HyperVRemove.ps1
     ```
 
-2. Start Cloudshell
+3. Start Cloudshell
 
-3. Run the script remove.ps1 in the Setup folder
-  ```powershell
-    .\MTTCoHackArc_AzureRemove.ps1
+4. Run the script remove.ps1 in the Setup folder
+    ```powershell
+      .\MTTCoHackArc_AzureRemove.ps1
     ```
