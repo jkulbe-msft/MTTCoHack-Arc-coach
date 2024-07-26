@@ -123,10 +123,10 @@ Invoke-LabCommand -ActivityName "update SRV1" -ComputerName SRV1 -scriptblock {
 Restart-LabVM -ComputerName 'SRV1'
 
 # switch Linux machine to nested switch, will not pick up IP otherwise
-$vm = Get-VM -Name 'LIN1'
-$adapter = Get-VMNetworkAdapter -VM $vm
-Disconnect-VMNetworkAdapter -VMNetworkAdapter $adapter
-Connect-VMNetworkAdapter -VMNetworkAdapter $adapter -SwitchName 'NestedSwitch'
+#$vm = Get-VM -Name 'LIN1'
+#$adapter = Get-VMNetworkAdapter -VM $vm
+#Disconnect-VMNetworkAdapter -VMNetworkAdapter $adapter
+#Connect-VMNetworkAdapter -VMNetworkAdapter $adapter -SwitchName 'NestedSwitch'
 
 
 # Features

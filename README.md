@@ -46,7 +46,29 @@
    >![archi](./images/powershellapp.png)
 
 7. Once the deployment is done, store credentials information to share them with attendees
-    
+
+## Solution
+1. Share the credentials for **HVHOST** with the attendees.
+2. Share the credentials for **DC1**, **SRV1** and **LIN1** with the attendees.
+3. Share the credentials for the Azure environment with the attendees.
+4. Remind attendees that **HVHOST** should **not** be onboarded to Azure Arc.
+
+### Challenge 1: Onboard on-prem servers to Azure Arc
+1. Log on to HVHOST using the provided credentials. Open Hyper-V manager. If DC1, SRV1, and LIN1 are not running, start them.
+2. In Hyper-V manager on HVHOST, connect to SRV1. Choose any of these methods to onboard the server to Arc:
+    - Launch Arc Setup from server manager ![image](./images/SRV1_Arc1.png)
+    - Launch Arc Setup from the start menu ![image](./images/SRV1_Arc2.png)
+    - Launch Arc setup from the system tray icon ![image](./images/SRV1_Arc3.png)
+3. For DC1, log on to the Azure portal, navigate to Azure Arc, click on "Add resources/Add a machine/Add a single server", then follow the prompts. Run the generated script on DC1 and sign in to Azure using the machine flow when prompted.
+4. For LIN1 log on to the Azure portal, navigate to Azure Arc, click on "Add resources/Add a machine/Add a multiple servers", then follow the prompts. Create a service principal when prompted and note down the details. Fill in the details in the generated script. Run the generated script on DC1
+    - The service principal should be created in the resource group and in the interest of security have a 1 day secret lifetime and only the *"Azure Connected Machine Onboarding"* role.
+5. Verify that all servers are onboarded to Azure Arc by checking the Azure portal.
+
+### Challenge 2: Manage and govern your on-prem resources at scale
+
+### Challenge 3: Use Defender for Cloud to get recommendations for your on-prem servers
+
+### Challenge 4: manage your SQL Server using Azure Arc from the Azure portal
 
 ## Clean up
 
