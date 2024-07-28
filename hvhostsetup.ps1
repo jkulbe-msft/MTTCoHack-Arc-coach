@@ -61,7 +61,10 @@ Start-BitsTransfer -Destination C:\LabSources\sql2022-ssei-dev.exe -Source 'http
 Start-Process -FilePath C:\LabSources\sql2022-ssei-dev.exe -ArgumentList "/action=download /mediatype=iso /mediapath=C:\LabSources\ISOs /quiet" -Wait
 
 # download Ubuntu Desktop
-Start-BitsTransfer -Destination C:\LabSources\ISOs\ubuntu-24.04-desktop-amd64.iso -Source 'https://mirror.pilotfiber.com/ubuntu-iso/24.04/ubuntu-24.04-live-server-amd64.iso'
+# Start-BitsTransfer -Destination C:\LabSources\ISOs\ubuntu-24.04-desktop-amd64.iso -Source 'https://mirror.pilotfiber.com/ubuntu-iso/24.04/ubuntu-24.04-live-server-amd64.iso'
+Start-BitsTransfer -Destination F:\ubuntu-jammy-hyperv-amd64-ubuntu-desktop-hyperv.vhdx.zip -Source 'https://partner-images.canonical.com/hyper-v/desktop/jammy/release/current/ubuntu-jammy-hyperv-amd64-ubuntu-desktop-hyperv.vhdx.zip'
+New-Item -Path F:\LIN1 -ItemType Directory -Force
+Expand-Archive -Path F:\ubuntu-jammy-hyperv-amd64-ubuntu-desktop-hyperv.vhdx.zip -DestinationPath F:\LIN1
 
 Unblock-LabSources
 
@@ -111,9 +114,16 @@ Add-LabDiskDefinition -Name 'SRV1-Logs' -DiskSizeInGb 10 -Label 'Logs' -DriveLet
 Add-LabMachineDefinition -Name 'SRV1' -Roles FileServer,SQLServer2022 -IsDomainJoined -DiskName 'SRV1-Data','SRV1-Logs' -OperatingSystem $osNameWithDesktop -MinMemory 1GB -MaxMemory 8GB -Processors 4 -Network $labname -Gateway 192.168.50.3 
 
 # Linux
-Add-LabMachineDefinition -Name 'LIN1' -OperatingSystem $osLinux -MinMemory 512MB -MaxMemory 4GB -Network 'NestedSwitch'
+# Add-LabMachineDefinition -Name 'LIN1' -OperatingSystem $osLinux -MinMemory 512MB -MaxMemory 4GB -Network 'NestedSwitch'
 
 Install-Lab -DelayBetweenComputers 60 -ErrorAction Continue
+
+# Linux
+New-VM -Name LIN1 -MemoryStartupBytes 4GB -BootDevice VHD -VHDPath "F:\ubuntu-jammy-hyperv-amd64-ubuntu-desktop-hyperv.vhdx\livecd.ubuntu-desktop-hyperv.vhdx" -Path F:\Test -Generation 2 -Switch 'NestedSwitch'
+Set-VM -VMName LIN1 -EnhancedSessionTransportType HvSocket -ProcessorCount 4
+Enable-VMIntegrationService -VMName LIN1 -Name "Guest Service Interface"
+Set-VMFirmware -VMName LIN1 -EnableSecureBoot Off
+Start-VM -Name LIN1
 
 # patch SRV1
 Copy-LabFileItem -Path "C:\LabSources\OSUpdates\windows10.0-kb5031364-x64_03606fb9b116659d52e2b5f5a8914bbbaaab6810.msu" -ComputerName SRV1 -DestinationFolderPath C:\
@@ -121,13 +131,6 @@ Invoke-LabCommand -ActivityName "update SRV1" -ComputerName SRV1 -scriptblock {
     expand -f:* C:\windows10.0-kb5031364-x64_03606fb9b116659d52e2b5f5a8914bbbaaab6810.msu C:\ ;
     dism /online /add-package /packagepath:C:\Windows10.0-KB5031364-x64.cab /quiet /norestart }
 Restart-LabVM -ComputerName 'SRV1'
-
-# switch Linux machine to nested switch, will not pick up IP otherwise
-#$vm = Get-VM -Name 'LIN1'
-#$adapter = Get-VMNetworkAdapter -VM $vm
-#Disconnect-VMNetworkAdapter -VMNetworkAdapter $adapter
-#Connect-VMNetworkAdapter -VMNetworkAdapter $adapter -SwitchName 'NestedSwitch'
-
 
 # Features
 $dcjob = Install-LabWindowsFeature -FeatureName RSAT -ComputerName 'DC1' -IncludeAllSubFeature -IncludeManagementTools
