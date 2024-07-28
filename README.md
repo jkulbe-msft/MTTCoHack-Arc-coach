@@ -55,7 +55,7 @@
 
 ### Challenge 1: Onboard on-prem servers to Azure Arc
 1. Log on to HVHOST using the provided credentials. Open Hyper-V manager. If DC1, SRV1, and LIN1 are not running, start them.
-2. In Hyper-V manager on HVHOST, connect to SRV1. Choose any of these methods to onboard the server to Arc:
+2. In Hyper-V manager on HVHOST, connect to SRV1. Use a supported region for Arc-enabled SQL Server. Choose any of these methods to onboard the server to Arc:
     - Launch Arc Setup from server manager ![image](./images/SRV1_Arc1.png)
     - Launch Arc Setup from the start menu ![image](./images/SRV1_Arc2.png)
     - Launch Arc setup from the system tray icon ![image](./images/SRV1_Arc3.png)
@@ -65,10 +65,23 @@
 5. Verify that all servers are onboarded to Azure Arc by checking the Azure portal.
 
 ### Challenge 2: Manage and govern your on-prem resources at scale
-
+- Enable Insights from the Azure portal under Azure Arc Machines/Monitoring
+  - When creating the Data Collection Rule (DCR), ensure that network and process info is selected and the DCR is connected to the pre-created Log Analytics workspace in rg-cohackArc.
+  - all machines can use the same DCR
+- SQL: on Arc machines/SRV1/Extensions, check if SQL extension is present. If not, add the extension manually using the "add" button. Select license type "LicenseOnly".
+- In Azure Policy, find the policy "Configure periodic checking for missing system updates on azure Arc-enabled servers"
+  - assign the policy to the RG
+  - enable a remediation task to fix existing machines
+- Updates: Open Azure Update Manager
+  - Select all 3 machines, run "check for updates"
+  - Select all 3 machines, run "schedule updates"
+  
 ### Challenge 3: Use Defender for Cloud to get recommendations for your on-prem servers
-
+- see the recommendations from Defender for Cloud or Arc machines/Security
 ### Challenge 4: manage your SQL Server using Azure Arc from the Azure portal
+- Licensing: go to Arc machines/SRV1/SQL Server Configuration
+- Entra login: go to Arc/Data services/SQL Server instances/Settings/Microsoft Entra ID, set admin
+- Best practices assessment: go to Arc/Data services/SQL Server instances/Best practices assessment
 
 ## Clean up
 

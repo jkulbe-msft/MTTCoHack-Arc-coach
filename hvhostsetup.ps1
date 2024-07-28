@@ -133,9 +133,12 @@ Invoke-LabCommand -ActivityName "update SRV1" -ComputerName SRV1 -scriptblock {
 Restart-LabVM -ComputerName 'SRV1'
 
 # Features
-$dcjob = Install-LabWindowsFeature -FeatureName RSAT -ComputerName 'DC1' -IncludeAllSubFeature -IncludeManagementTools
+$rsatjob = Install-LabWindowsFeature -FeatureName RSAT -ComputerName 'DC1','SRV1' -IncludeAllSubFeature -IncludeManagementTools
+Wait-LWLabJob -Job $rsatjob -ProgressIndicator 10 -NoDisplay -PassThru
 
-Wait-LWLabJob -Job $dcjob -ProgressIndicator 10 -NoDisplay -PassThru
+# sample DBs
+$sqlvm = Get-LabVM -ComputerName SRV1
+Install-LabSqlSampleDatabases -Machine $sqlvm
 
 Show-LabDeploymentSummary -Detailed
 Stop-Transcript

@@ -77,17 +77,29 @@ $role.AssignableScopes.Add("/subscriptions/$subscriptionId")
 
 New-AzRoleDefinition -Role $role
 
+$role = Get-AzRoleDefinition -Name "Azure Connected Machine Resource Administrator"
+$role.Id = $null
+$role.Name = "Azure Connected Machine Resource Administrator - Custom"
+$role.IsCustom = $True
+$role.Actions.RemoveRange(0,$role.Actions.Count)
+$role.Actions.Add("Microsoft.HybridCompute/*")
+$role.AssignableScopes.Clear()
+$role.AssignableScopes.Add("/subscriptions/$subscriptionId")
+
+New-AzRoleDefinition -Role $role
+
 #assign RBAC roles to cohacker user on the resource Group
 New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Security Admin" -ResourceGroupName $ResourceGroup
 New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Log Analytics Contributor" -ResourceGroupName $ResourceGroup
 New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Monitoring Contributor" -ResourceGroupName $ResourceGroup
-New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Azure Connected Machine Resource Administrator" -ResourceGroupName $ResourceGroup
-New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "User Access Administrator" -ResourceGroupName $ResourceGroup
+New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Azure Connected Machine Resource Administrator - Custom" -ResourceGroupName $ResourceGroup
+#New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "User Access Administrator" -ResourceGroupName $ResourceGroup
 #New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Resource Policy Contributor" -ResourceGroupName $ResourceGroup
 #New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Virtual Machine Contributor" -ResourceGroupName $ResourceGroup
+New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Resource Policy Contributor - Custom" -ResourceGroupName $ResourceGroup
 
 #assign RBAC roles to cohacker user on the subscription
-New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Resource Policy Contributor - Custom" -Scope /subscriptions/$subscriptionId
+# New-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Resource Policy Contributor - Custom" -Scope /subscriptions/$subscriptionId
 
 $WorkspaceName = "log-analytics-" + (Get-Random -Maximum 99999) # workspace names need to be unique in resource group - Get-Random helps with this for the example code
 $Location = $region

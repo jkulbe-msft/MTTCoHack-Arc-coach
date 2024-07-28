@@ -20,9 +20,12 @@ Remove-AzRoleAssignment -ObjectId $cohackerId -RoleDefinitionName "Resource Poli
 
 # remove a custom role
 Remove-AzRoleDefinition -Name "Resource Policy Contributor - Custom" -Force
+Remove-AzRoleDefinition -Name "Azure Connected Machine Resource Administrator - Custom" -Force
 
 # delete a resource group
 Remove-AzResourceGroup -Name "rg-cohackArc" -Force
 
 # delete cohacker user
 Remove-AzADUser -UserPrincipalName "cohacker@$domain" 
+
+Write-Host "Please delete any service prncipals created during the lab"
