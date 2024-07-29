@@ -119,7 +119,7 @@ Add-LabMachineDefinition -Name 'SRV1' -Roles FileServer,SQLServer2022 -IsDomainJ
 Install-Lab -DelayBetweenComputers 60 -ErrorAction Continue
 
 # Linux
-New-VM -Name LIN1 -MemoryStartupBytes 4GB -BootDevice VHD -VHDPath "F:\ubuntu-jammy-hyperv-amd64-ubuntu-desktop-hyperv.vhdx\livecd.ubuntu-desktop-hyperv.vhdx" -Path F:\Test -Generation 2 -Switch 'NestedSwitch'
+New-VM -Name LIN1 -MemoryStartupBytes 4GB -BootDevice VHD -VHDPath "F:\LIN1\livecd.ubuntu-desktop-hyperv.vhdx" -Path F:\LIN1 -Generation 2 -Switch 'NestedSwitch'
 Set-VM -VMName LIN1 -EnhancedSessionTransportType HvSocket -ProcessorCount 4
 Enable-VMIntegrationService -VMName LIN1 -Name "Guest Service Interface"
 Set-VMFirmware -VMName LIN1 -EnableSecureBoot Off
