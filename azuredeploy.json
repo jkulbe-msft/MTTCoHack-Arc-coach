@@ -9,6 +9,18 @@
     }
   },
   "parameters": {
+    "HostAdminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "Admin Username for the Host Virtual Machine"
+      }
+    },
+    "HostAdminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Admin User Password for the Host Virtual Machine"
+      }
+    },
     "_artifactsLocation": {
       "type": "string",
       "defaultValue": "[deployment().properties.templateLink.uri]",
@@ -148,18 +160,6 @@
       ],
       "metadata": {
         "description": "Size of the Host Virtual Machine"
-      }
-    },
-    "HostAdminUsername": {
-      "type": "string",
-      "metadata": {
-        "description": "Admin Username for the Host Virtual Machine"
-      }
-    },
-    "HostAdminPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Admin User Password for the Host Virtual Machine"
       }
     }
   },
