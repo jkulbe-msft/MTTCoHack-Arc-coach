@@ -32,7 +32,7 @@
 
 ## Setup instructions HVHOST environment
 
-1. Deploy Arc lab to Azure using the following button. You can deploy into resource group rg-cohackArc or a separate one if you want to keep the resources separate.
+1. Deploy Arc lab to Azure using the following button. You can deploy into resource group rg-cohackArc or a separate one if you want to keep the resources separate. Set a user name, password, resource group and location. Leave the other parameters unchanged.
     
     [![Deploy Arc lab to Azure](https://raw.githubusercontent.com/jkulbe-msft/MTTCoHack-Arc-coach/main/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjkulbe-msft%2FMTTCoHack-Arc-coach%2Fmain%2Fazuredeploy.json)
    
