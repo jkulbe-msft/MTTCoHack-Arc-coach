@@ -1,3 +1,6 @@
+param (
+    $resourceGroup = 'rg-cohackArc'
+)
 # connect to MS graph
 try {
     Connect-MgGraph -Scopes "Directory.ReadWrite.All" -ErrorAction Stop
@@ -23,7 +26,7 @@ Remove-AzRoleDefinition -Name "Resource Policy Contributor - Custom" -Force
 Remove-AzRoleDefinition -Name "Azure Connected Machine Resource Administrator - Custom" -Force
 
 # delete a resource group
-Remove-AzResourceGroup -Name "rg-cohackArc" -Force
+Remove-AzResourceGroup -Name $resourceGroup -Force
 
 # delete cohacker user
 Remove-AzADUser -UserPrincipalName "cohacker@$domain" 

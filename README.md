@@ -43,9 +43,11 @@
 
     DC1 and SRV1 are joined to the domain corp.contoso.com. The domain admin account is `corp\administrator` with the password `Somepass1`.
 
-2. Sign in to HVHOST using RDP, open the Hyper-V console, connect to LIN1 and finish the setup by accepting the default settings. Create a user account and password and note it down.
+2. Sign in to HVHOST using RDP. Note that for security reasons, the RDP port is not open to the internet. For enabling RDP, please configure Just-in-Time access from the connect dialog in the Azure portal or deploy Azure Bastion.
+   
+3. On HVHOST, open the Hyper-V console, connect to LIN1 and finish the setup by accepting the default settings. Create a user account and password and note it down.
 
-3. Share the login details for HVHOST, DC1, SRV1 and LIN1 with the attendees.
+4. Share the login details for HVHOST, DC1, SRV1 and LIN1 with the attendees.
 
 ## Solution
 1. Share the credentials for **HVHOST** with the attendees.
@@ -89,9 +91,9 @@
 
 2. Start Cloudshell
 
-3. Run the script remove.ps1 in the Setup folder
+3. Run the script remove.ps1 in the Setup folder, specifying the resource group is optional, the default is 'rg-cohackArc'.
     ```powershell
-      .\MTTCoHackArc_AzureRemove.ps1
+      .\MTTCoHackArc_AzureRemove.ps1 [-resourceGroup 'rg-cohackArc']
     ```
 
 4. Delete any service pricipals created during the lab
